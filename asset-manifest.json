@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/2nd-March-Basic-crud-operations/static/css/main.e6c13ad2.css",
+    "main.js": "/2nd-March-Basic-crud-operations/static/js/main.8a9a50c1.js",
+    "static/js/787.cda612ba.chunk.js": "/2nd-March-Basic-crud-operations/static/js/787.cda612ba.chunk.js",
+    "index.html": "/2nd-March-Basic-crud-operations/index.html",
+    "main.e6c13ad2.css.map": "/2nd-March-Basic-crud-operations/static/css/main.e6c13ad2.css.map",
+    "main.8a9a50c1.js.map": "/2nd-March-Basic-crud-operations/static/js/main.8a9a50c1.js.map",
+    "787.cda612ba.chunk.js.map": "/2nd-March-Basic-crud-operations/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.8a9a50c1.js"
+  ]
+}
