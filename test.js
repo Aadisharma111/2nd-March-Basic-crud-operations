@@ -61,3 +61,4 @@ let newoldaoo = oldaoo.map((cv,idx,arr)=>{
             }
 });  
 console.log('after map function ->',newoldaoo);
+//
