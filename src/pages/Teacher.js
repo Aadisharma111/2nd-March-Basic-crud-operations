@@ -2,6 +2,7 @@
 //2. Functional Defination Area
 //3. Export Default Function
 
+import {  } from "@testing-library/user-event/dist/utils";
 import { useEffect, useState } from "react";
 
 
@@ -16,15 +17,20 @@ function Teacher() {
                                             {
                                               id:1,
                                               name:'Ravi',
-                                              createdAt:'1234567'
+                                              createdAt:'02/03/2023'
                                             },
                                             {
                                               id:2,
                                               name:'Rahul',
-                                              createdAt:'1022547'
+                                              createdAt:'02/03/2023'
                                             }
                                           ])
-
+  const [payload,setPayload] = useState({
+                                          "data": {
+                                            "name": "teacher3"
+                                          }
+                                        })                                       
+  const [teachername,setTeacherName] = useState('');
   // useEffect is for page load
   // I want to call the api after the page load
   //useEffect(cbfn,arr);
@@ -52,37 +58,65 @@ function Teacher() {
     .catch();
 
   },[]);
-  //anil(actualArg1,actualArg2,....);
+  //(actualArg1,actualArg2,....);
   //Every Hook is a function
 
   //2.2 Function defination area
+  let sendData = ()=>{
+                    alert('Invalid Action');
+                    fetch(`http://localhost:1337/api/teachers`,{
+                      "method":"POST",
+                      "headers":{
+                        //P:V
+                        "Content-Type": "application/json"
+                      },
+                      "body":JSON.stringify(payload)
+                    }).then((res)=>{
+                      //I Want the convert response into JSON readdable 
+                      return res.json(); 
+                    }).then((data)=>{
+                      console.log(data);
+                      if(data){
+                        alert("Teacher created Successfully");
+                      }
+                    }).catch((err)=>{
+                      console.log(err);
+
+                    })
+                    
+                    
+                 }
+  let karan =(e)=>{
+  console.log(e.target.value);
+  setTeacherName(e.target.value);
+  console.log('Hook teachername',teachername);
+  setPayload({
+    ...payload,
+    data:{
+      name:document.querySelector('input#teachername').value
+    }
+  });
+  }
 
 
   //2.3 Return statement
   return (
       <>
         <div className="container">
+          <h1>Create Teacher</h1>
           <form>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-              <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" />
-            </div>
-            <div className="mb-3 form-check">
-              <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-              <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+              <label htmlFor="teachername" className="form-label">Teacher Name</label>
+              <input type="Text" className="form-control" id="teachername" name="name" onKeyDown={(e)=>{karan(e)}}  />
+              </div>
+           
+            <button type="button" className="btn btn-primary" onClick={()=>sendData()}>Submit</button>
           </form>
           <br />
           <hr />
           <hr />
           <br />
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -93,7 +127,7 @@ function Teacher() {
             <tbody>
               {
                 teachers.map((cv,idx,arr)=>{
-                  return <tr>
+                  return <tr key={idx}>
                             <td>{cv.id}</td>
                             <td>{cv.name}</td>
                             <td>{cv.createdAt}</td>
